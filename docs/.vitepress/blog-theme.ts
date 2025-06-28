@@ -65,10 +65,10 @@ const blogTheme = getThemeConfig({
   //   analysis?: HomeAnalysis
   // },
   home: {
-    name: 'XHAO',
-    motto: 'XHAO的个人博客',
-    inspiring: '基于 Vitepress 定制 🎨',
-    pageSize: 6,
+    // name: 'XHAO的个人空间',
+    // motto: '技术学习，生活点滴',
+    // inspiring: '基于 Vitepress 定制 🎨',
+    // pageSize: 6,
     author: 'XHAO',
     avatarMode: 'split',
     analysis: {
@@ -82,7 +82,7 @@ const blogTheme = getThemeConfig({
   footer: {
     // message 字段支持配置为HTML内容，配置多条可以配置为数组
     // message: '下面 的内容和图标都是可以修改的噢（当然本条内容也是可以隐藏的）',
-    copyright: 'MIT License | XHAO',
+    // copyright: 'MIT License | XHAO',
     // icpRecord: {
     //   name: '蜀ICP备19011724号',
     //   link: 'https://beian.miit.gov.cn/'
@@ -98,7 +98,7 @@ const blogTheme = getThemeConfig({
 
   // Type: FormatShowDate 用于自定义日期显示。
   formatShowDate(date) {
-    return new Date(date).toLocaleString()
+    return new Date(date).toLocaleString('zh-CN')
   },
   // formatShowDate: {
   //   minutesAgo: ' minutes ago',
@@ -158,22 +158,22 @@ const blogTheme = getThemeConfig({
   },
 
   // 友链
-  friend: [
-    // {
-    //   nickname: '粥里有勺糖',
-    //   des: '你的指尖用于改变世界的力量',
-    //   avatar:
-    //     'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
-    //   url: 'https://sugarat.top',
-    // },
-    {
-      nickname: 'Vitepress',
-      des: 'Vite & Vue Powered Static Site Generator',
-      avatar:
-        'https://vitepress.dev/vitepress-logo-large.webp',
-      url: 'https://vitepress.dev/',
-    },
-  ],
+  // friend: [
+  //   // {
+  //   //   nickname: '粥里有勺糖',
+  //   //   des: '你的指尖用于改变世界的力量',
+  //   //   avatar:
+  //   //     'https://img.cdn.sugarat.top/mdImg/MTY3NDk5NTE2NzAzMA==674995167030',
+  //   //   url: 'https://sugarat.top',
+  //   // },
+  //   {
+  //     nickname: 'Vitepress',
+  //     des: 'Vite & Vue Powered Static Site Generator',
+  //     avatar:
+  //       'https://vitepress.dev/vitepress-logo-large.webp',
+  //     url: 'https://vitepress.dev/',
+  //   },
+  // ],
 
   // 评论
   // 配置文章的评论，使用 giscus（由 GitHub Discussions 驱动的评论系统）
@@ -191,49 +191,49 @@ const blogTheme = getThemeConfig({
   },
 
   //  用于控制文章底部按钮，点击按钮会在按钮下方渲染一个自定义的html内容，例如可以用来做赞赏按钮，内置了 wechatPay 和 aliPay 两个图标，也可自定义图标(svg)。
-  buttonAfterArticle: {
-    openTitle: '点赞',
-    closeTitle: '下次一定',
-    // content: '<img src="https://img.cdn.sugarat.top/mdImg/MTY0Nzc1NTYyOTE5Mw==647755629193">',
-    // icon: 'aliPay'
-  },
+  // buttonAfterArticle: {
+  //   openTitle: '点赞',
+  //   closeTitle: '下次一定',
+  //   // content: '<img src="https://img.cdn.sugarat.top/mdImg/MTY0Nzc1NTYyOTE5Mw==647755629193">',
+  //   // icon: 'aliPay'
+  // },
 
   // 公告
   // 设置一个全局的公告弹窗，支持设置图片，文字，按钮，跳链
   // 公共已拆分为独立插件，详细配置和使用方法可以见插件文档：vitepress-plugin-announcement
-  popover: {
-    title: '公告',
-    body: [
-      // { type: 'text', content: '👇公众号👇---👇 微信 👇' },
-      // {
-      //   type: 'image',
-      //   src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp'
-      // },
-      // {
-      //   type: 'text',
-      //   content: '欢迎大家加群&私信交流'
-      // },
-      // {
-      //   type: 'text',
-      //   content: '文章首/文尾有群二维码',
-      //   style: 'padding-top:0'
-      // },
-      // {
-      //   type: 'button',
-      //   content: '作者博客',
-      //   link: 'https://sugarat.top'
-      // },
-      // {
-      //   type: 'button',
-      //   content: '加群交流',
-      //   props: {
-      //     type: 'success'
-      //   },
-      //   link: 'https://theme.sugarat.top/group.html',
-      // }
-    ],
-    duration: 0
-  },
+  // popover: {
+  //   title: '公告',
+  //   body: [
+  //     // { type: 'text', content: '👇公众号👇---👇 微信 👇' },
+  //     // {
+  //     //   type: 'image',
+  //     //   src: 'https://img.cdn.sugarat.top/mdImg/MTYxNTAxODc2NTIxMA==615018765210~fmt.webp'
+  //     // },
+  //     // {
+  //     //   type: 'text',
+  //     //   content: '欢迎大家加群&私信交流'
+  //     // },
+  //     // {
+  //     //   type: 'text',
+  //     //   content: '文章首/文尾有群二维码',
+  //     //   style: 'padding-top:0'
+  //     // },
+  //     // {
+  //     //   type: 'button',
+  //     //   content: '作者博客',
+  //     //   link: 'https://sugarat.top'
+  //     // },
+  //     // {
+  //     //   type: 'button',
+  //     //   content: '加群交流',
+  //     //   props: {
+  //     //     type: 'success'
+  //     //   },
+  //     //   link: 'https://theme.sugarat.top/group.html',
+  //     // }
+  //   ],
+  //   duration: 0
+  // },
 
   // article 设置文章全局相关能力
   // interface ArticleConfig {
@@ -337,13 +337,13 @@ const blogTheme = getThemeConfig({
   //   showIcon?: boolean
   //   html?: string
   // }
-  alert: {
-    type: 'success',
-    title: '标配内容，这是一个不会自动关闭的弹窗',
-    duration: -1,
-    description: '每次打开都会展示，可通过 html 属性自定义这块内容',
-    showIcon: true
-  }
+  // alert: {
+  //   type: 'success',
+  //   title: '标配内容，这是一个不会自动关闭的弹窗',
+  //   duration: -1,
+  //   description: '每次打开都会展示，可通过 html 属性自定义这块内容',
+  //   showIcon: true
+  // }
 })
 
 export { blogTheme }

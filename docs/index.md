@@ -2,8 +2,8 @@
 layout: home
 # 首页部分元素定制
 blog:
- name: 'XHAO'
- motto: 'XHAO 的个人博客'
+ name: "XHAO's Blog"
+ motto: '技术学习，生活点滴'
  inspiring:
 #  - 基于 Vitepress 定制的主题🎨
 #  - 千万不要因为走得太久，而忘记了我们为什么出发
@@ -11,6 +11,6 @@ blog:
 #  - 无论多么沉重的负担，也不要忘记微笑；无论多么漫长的路程，也不要忘记坚持
 #  - 生活的真谛不在繁华，而在于淡泊
  # 设置 inspiringTimeout 可以实现自动切换
- inspiringTimeout: 3000
+#  inspiringTimeout: 3000
  pageSize: 6
 ---
