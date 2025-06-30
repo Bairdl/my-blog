@@ -53,6 +53,53 @@ const (
 )
 ```
 
+## 命名约定
+
+在 Go 的命名中，有以下一些命名约定。
+
+1. 包内变量，大小写决定可见性
+   1. 包级公开标识符：首字母大写。
+   2. 包级私有标识符：首字母小写。（都是驼峰命名）
+2. 包名
+   1. 全部小写字母，无下划线。
+   2. 使用单数名词。
+   3. 简介明了，避免过长。
+3. 接口名
+   1. 单方法接口：方法名+`er`后缀。
+   2. 多方法接口：描述行为的名称。
+4. 错误类型
+   1. 错误类型名：`...Error`。
+   2. 错误变量名：`Err..`。
+5. 方法接收者名
+   1. 1-2 个字母的**类型缩写**（例如`c *Client`而不是`client *Client`）
+   2. 保持一致性（同一类型的所有方法应使用相同的接收者名）
+
+常用短变量名
+| 变量类型 | 推荐名称 | 示例 |
+|----------------|----------|-----------------------|
+| 任意类型 | `v` | `func(v T)` |
+| 数组/切片 | `a` | `a := []int{1,2,3}` |
+| 循环索引 | `i`, `j` | `for i := range a` |
+| 映射 | `m` | `m := make(map...)` |
+| 错误 | `err` | `if err != nil` |
+| 上下文 | `ctx` | `func(ctx context.Context)` |
+| 字节切片 | `b` | `b := []byte("...")` |
+| 缓冲区 | `buf` | `buf := new(bytes.Buffer)` |
+| 测试对象 | `t` | `func TestX(t *testing.T)` |
+
+命名习惯总结表
+
+| 元素类型   | 命名风格     | 示例            | 特殊规则           |
+| ---------- | ------------ | --------------- | ------------------ |
+| 包名       | 全小写       | encoding        | 单数名词           |
+| 导出标识符 | PascalCase   | ServerConfig    | 首字母大写         |
+| 私有标识符 | camelCase    | internalCache   | 首字母小写         |
+| 接口       | -er 后缀     | Stringer        | 描述行为           |
+| 错误变量   | Err 前缀     | ErrNotFound     | 驼峰式             |
+| 测试函数   | Test 前缀    | TestParseConfig | 参数 t \*testing.T |
+| 接收者     | 1-2 字母缩写 | (c \*Client)    | 类型首字母         |
+| 首字母缩写 | 全大写       | HTTPHandler     | URL、ID 等         |
+
 ## 基本数据类型
 
 | 类型      | 说明                  | 示例                 |
@@ -110,13 +157,66 @@ for n > 0 {
     n = n - 1
 }
 
+
 // 无限循环
 for {
     fmt.Println("Looping forever")
 }
+
+// dowhile
+for {
+    fmt.Println("Executing at least once")
+
+    if condition {
+        break
+    }
+}
+```
+
+Go 只提供了 `for` 这一种循环结构，但可以通过不同的用法覆盖所有的循环场景。
+
+特殊场景
+
+```go
+// 集合迭代
+// 替代 foreach
+nums := []int{1, 2, 3}
+for index, value := range nums {
+    fmt.Printf("Index:%d Value:%d\n", index, value)
+}
+
+// 仅取值
+for _, value := range nums {
+    fmt.Println(value)
+}
+
+
+// 带条件的 break/continue
+for {
+    // 复杂逻辑
+
+    if shouldBreak {
+        break // 替代 do-while 的条件检查
+    }
+
+    if shouldContinue {
+        continue
+    }
+}
+
+// 带标签的循环控制
+OuterLoop:
+for i := 0; i < 5; i++ {
+    for j := 0; j < 5; j++ {
+        if i*j == 12 {
+            break OuterLoop // 跳出外层循环
+        }
+    }
+}
 ```
 
 switch 语句
+go 的 switch 语句不需要 break
 
 ```go
 // 基本 switch
@@ -130,6 +230,7 @@ default:
 }
 
 // 无值 switch
+// 将switch 当作一组if-else链来使用
 num := 75
 switch {
 case num < 50:
@@ -261,9 +362,31 @@ func pointerBasics() {
 }
 ```
 
+`make`函数用于初始化内建的数据结构（切片、映射和通道），并分配内存以及设置初始参数。它返回的是被初始化的（非零值）对象，而不是指针。
+
+`make`函数有三种使用形式：
+
+```go
+// 切片：指定类型、长度和容量（容量可选）
+make([]T, len)
+make([]T, len, cap)
+// 映射：指定键值类型，可指定初始容量（可选）
+make(map[K]V)
+make(map[K]V, initialCapacity)
+// 通道：指定元素类型和缓冲区容量（容量可选）
+make(chan T)
+make(chan T, capacity)
+```
+
+| 类型 | 初始化内容                       |
+| ---- | -------------------------------- |
+| 切片 | 底层数组 + 切片头（ptr/len/cap） |
+| 映射 | 哈希表桶数组 + 溢出桶结构        |
+| 通道 | 环形缓冲区 + 协程同步原语        |
+
 ## 方法和接口
 
-方法
+### 方法
 
 ```go
 type Rectangle struct {
@@ -283,7 +406,26 @@ func (r *Rectangle) Scale(factor float64) {
 }
 ```
 
-接口
+1. **值接收者方法 (Value Receiver)**:
+   ```go
+   type T struct{}
+   func (t T) M() {}
+   ```
+   - **调用对象**：可以通过值类型或指针类型调用（Go 会自动转换）
+   - **操作对象**：方法内操作的是接收者的**副本**，对原始对象的修改不会影响原值
+2. **指针接收者方法 (Pointer Receiver)**:
+   ```go
+   type T struct{}
+   func (t *T) M() {}
+   ```
+   - **调用对象**：可以通过指针类型或值类型调用（Go 会自动取地址）
+   - **操作对象**：方法内操作的是接收者**指针指向的原始对象**，修改会影响原值
+     **核心区别**：
+
+- 值接收者：方法内修改不影响原接收者（安全但可能低效，因为复制）
+- 指针接收者：方法内修改会影响原接收者（高效，避免大对象复制）
+
+### 接口
 
 ```go
 type Shape interface {
