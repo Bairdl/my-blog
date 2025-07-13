@@ -1,8 +1,10 @@
 .VPHome {
   // 定义遮罩样式
-  background: radial-gradient(ellipse,
-      rgba(var(--bg-gradient-home), 1) 0%,
-      rgba(var(--bg-gradient-home), 0) 150%);
+  background: radial-gradient(
+    ellipse,
+    rgba(var(--bg-gradient-home), 1) 0%,
+    rgba(var(--bg-gradient-home), 0) 150%
+  );
 
   // 自定义首页背景图
   &::before {
@@ -10,4 +12,69 @@
     background-image: url(./assets/bg.webp);
     background-size: cover;
   }
+}
+
+.vp-doc {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2.0rem;
+    display: block; /* 让下划线宽度与文本内容一致 */
+    border-bottom: 2px solid #333; /* 颜色、粗细自定义 */
+    padding-bottom: 5px; /* 控制下划线与文本的间距 */
+  }
+  h3 {
+    font-size: 1.8rem;
+  }
+  h4 {
+    font-size: 1.4rem;
+  }
+}
+
+
+/* 初始化所有标题的计数器 */
+body {
+  counter-reset: h1; /* 初始化 h1 计数器 */
+}
+h1 {
+  counter-reset: h2; /* h1 内部初始化 h2 计数器 */
+}
+h2 {
+  counter-reset: h3; /* h2 内部初始化 h3 计数器 */
+}
+h3 {
+  counter-reset: h4; /* h3 内部初始化 h4 计数器 */
+}
+h4 {
+  counter-reset: h5; /* h4 内部初始化 h5 计数器 */
+}
+h5 {
+  counter-reset: h6; /* h5 内部初始化 h6 计数器 */
+}
+
+/* 为每个标题添加自动编号 */
+h1::before {
+  counter-increment: h1; /* h1 自增 */
+  // content: counter(h1) ". ";
+}
+h2::before {
+  counter-increment: h2;
+  content: counter(h2) ". ";
+}
+h3::before {
+  counter-increment: h3;
+  content: counter(h2) "." counter(h3) ". ";
+}
+h4::before {
+  counter-increment: h4;
+  content: counter(h2) "." counter(h3) "." counter(h4) ". ";
+}
+h5::before {
+  counter-increment: h5;
+  content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". ";
+}
+h6::before {
+  counter-increment: h6;
+  content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". ";
 }
