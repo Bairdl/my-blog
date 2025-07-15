@@ -58,6 +58,8 @@ events = epoll_wait(epfd, events_list, max_events, timeout);
 - Nginx 维护一个 **红黑树（Red-Black Tree）** 管理定时器（如 `keepalive_timeout`）。
 - 每次事件循环检查是否有超时事件需要处理。
 
+多数情况下，Nginx 一个请求处理会跨越多个事件循环。
+
 ---
 
 ## 事件循环的高性能设计
