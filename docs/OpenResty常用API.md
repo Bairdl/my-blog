@@ -7,6 +7,7 @@ sticky: 1
 ## 请求处理与响应
 
 请求处理
+
 |API 名称 | 功能描述 |
 |---------|----------|
 |`ngx.req.get_headers()`| 获取请求头。|
@@ -17,6 +18,7 @@ sticky: 1
 |`ngx.redirect()`|请求重定向。|
 
 响应返回
+
 |API 名称 | 功能描述 |
 |---------|----------|
 |`ngx.status()`| 设置响应状态码。|
@@ -161,7 +163,7 @@ Nginx 只会记录等于或高于配置级别的日志：
 
 日志的配置通常在`nginx.conf`中。
 
-```conf
+```txt
 http {
     error_log /var/log/nginx/error.log warn;
 }
