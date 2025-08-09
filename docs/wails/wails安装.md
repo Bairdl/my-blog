@@ -31,7 +31,7 @@ Wails 是一个可以使用 Go 和 Web 技术编写桌面应用的项目。
 
 注意：如果您遇到了类似于以下内容的错误：
 
-```
+``` txt
 ....\Go\pkg\mod\github.com\wailsapp\wails\v2@v2.1.0\pkg\templates\templates.go:28:12: pattern all:ides/*: no matching files found
 ```
 
